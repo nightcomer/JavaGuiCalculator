@@ -1,12 +1,14 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class Calc extends JFrame {
+public class Calc extends JFrame implements KeyListener {
     JButton btnAdd, btnSub, btnMult, btnDiv, btnEq, btnDel, btnClr, btnDec;
     JButton[] numBtn;
     JTextField output;
     String previous, current, operator;
+
     public void delete() {
         if (current.length() > 0) {
             current = current.substring(0, current.length() - 1);
@@ -69,6 +71,72 @@ public class Calc extends JFrame {
         }
         current += num;
     }
+    // implement keyboard inputs
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_1) {
+            numBtn[1].doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_2) {
+            numBtn[2].doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_3) {
+            numBtn[3].doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_4) {
+            numBtn[4].doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_5) {
+            numBtn[5].doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_6) {
+            numBtn[6].doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_7) {
+            numBtn[7].doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_8) {
+            numBtn[8].doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_9) {
+            numBtn[9].doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_PERIOD) {
+            numBtn[10].doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_0) {
+            numBtn[0].doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_EQUALS) {
+            btnAdd.doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_MINUS) {
+            btnSub.doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ASTERISK) {
+            btnMult.doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_SLASH) {
+            btnDiv.doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnEq.doClick();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            btnDel.doClick();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
     private class NumBtnHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -117,6 +185,9 @@ public class Calc extends JFrame {
 
         current = "";
         previous = "";
+
+        addKeyListener(this);
+        this.setFocusable(true);
 
         //sub panels
         JPanel row1 = new JPanel();
@@ -200,6 +271,7 @@ public class Calc extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setSize(300, 300);
+
     }
     public static void main (String[] args) {
         new Calc();
